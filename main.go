@@ -1,7 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"./doctor"
+	"bufio"
+	"fmt"
+	"os"
+)
 
 func main() {
-	fmt.Println("Hello World")
+	reader := bufio.NewReader(os.Stdin)
+
+	whatToSay := doctor.Intro()
+
+	fmt.Println(whatToSay)
+
+	for {
+		fmt.Print("-> ")
+		userInput, _ := reader.ReadString('\n')
+
+		if userInput == "quit" {
+			break
+		} else {
+			response := doctor.Response(userInput)
+			fmt.Println(response)
+		}
+	}
 }
